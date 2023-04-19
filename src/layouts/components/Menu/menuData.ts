@@ -22,8 +22,29 @@ export const data = [
 			},
 			{
 				icon: 'AppstoreOutlined',
-				path: '/basic/03/-drawing-cube',
+				path: '/basic/03-drawing-cube',
 				title: 'Three.js绘制立方体'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/04-primitives',
+				title: '图元'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/05-scene',
+				title: '场景'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/06-material',
+				title: '材质'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/07-texture',
+				title: '纹理'
+
 			}
 		]
 	}

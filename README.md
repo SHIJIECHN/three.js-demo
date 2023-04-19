@@ -1,2 +1,2 @@
 # three.js-demo
-three.jsz学习案例
+three.js学习案例

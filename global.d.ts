@@ -1,4 +1,4 @@
-declare module '*.png';
+declare module '*.png'; // 告诉ts,允许在React代码中引入png格式的文件模型
 declare module '*.gif';
 declare module '*.jpg';
 declare module '*.jpeg';

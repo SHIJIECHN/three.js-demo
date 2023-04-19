@@ -1,12 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { BoxGeometry, DirectionalLight, Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, WebGLRenderer } from "three";
 
-const DrawingLine = () => {
+const DrawingCube = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const resizeHandleRef = useRef<() => void>();
-
-	const width = window.innerWidth - 325;
-	const height = window.innerHeight - 20;
 
 	useEffect(() => {
 		if (canvasRef.current) {
@@ -68,18 +65,24 @@ const DrawingLine = () => {
 				const canvas = renderer.domElement; // 获取canvas
 				camera.aspect = canvas.clientWidth / canvas.clientHeight; // 设置镜头宽高比
 				camera.updateProjectionMatrix(); // 通知镜头更新视锥（视野）
-
 				renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
 			};
 
 			handleResize(); // 默认打开时，即重新触发一次
 
 			resizeHandleRef.current = handleResize; // 将resizeHandleRef.current于useEffect中声明的函数进行绑定
-			window.addEventListener("resize", handleResize); // 添加窗口resize事件处理函数
+			// window.addEventListener("resize", handleResize); // 添加窗口resize事件处理函数
+
+			// 修改为使用ResizeObserver来监听尺寸变化
+			const resizeObserver = new ResizeObserver(()=>{
+				handleResize();
+			})
+			resizeObserver.observe(canvasRef.current)
 
 			return () => {
 				if (resizeHandleRef && resizeHandleRef.current) {
-					window.removeEventListener("resize", resizeHandleRef.current);
+					// window.removeEventListener("resize", resizeHandleRef.current);
+					resizeObserver.disconnect();
 				}
 			};
 		}
@@ -88,4 +91,4 @@ const DrawingLine = () => {
 	return <canvas ref={canvasRef} />;
 };
 
-export default DrawingLine;
+export default DrawingCube;
