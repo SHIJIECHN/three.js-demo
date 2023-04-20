@@ -11,11 +11,11 @@ import {useEffect, useRef} from "react";
 import {
 	BoxGeometry,
 	Color,
-	LoadingManager,
+	LoadingManager, MathUtils,
 	Mesh,
 	MeshBasicMaterial,
-	PerspectiveCamera,
-	Scene,
+	PerspectiveCamera, RepeatWrapping,
+	Scene, Texture,
 	TextureLoader,
 	WebGLRenderer
 } from "three";
@@ -76,32 +76,45 @@ const HelloTexture = ()=>{
 		// 	}))
 		// })
 
-		// 使用纹理加载管理器
+		// 3. 使用纹理加载管理器
 		// 创建所有纹理加载的管理器
-		const loadingManager = new LoadingManager();
-		// 创建一个纹理加载器
-		const loader = new TextureLoader(loadingManager);
-		// 创建6个面对应的材质
-		const materialArr: MeshBasicMaterial[] = [];
-		for(let i=0; i < 6; i++){
-			materialArr.push(new MeshBasicMaterial({
-				map: loader.load(`imgSrc${i}`)
-			}))
-		}
-		// 添加加载管理器的各种事件处理函数
-		loadingManager.onLoad = ()=>{
-			console.log('纹理图片资源加载完成')
-		}
-		loadingManager.onProgress = (url, loaded, total)=>{
-			console.log(`图片加载中,共${total}张,当前已加载${loaded}张${url}`);
-		}
-		loadingManager.onError = (url)=>{
-			console.log(`加载失败 ${url}`);
-		}
+		// const loadingManager = new LoadingManager();
+		// // 创建一个纹理加载器
+		// const loader = new TextureLoader(loadingManager);
+		// // 创建6个面对应的材质
+		// const materialArr: MeshBasicMaterial[] = [];
+		// for(let i=0; i < 6; i++){
+		// 	materialArr.push(new MeshBasicMaterial({
+		// 		map: loader.load(`imgSrc${i}`)
+		// 	}))
+		// }
+		// // 添加加载管理器的各种事件处理函数
+		// loadingManager.onLoad = ()=>{
+		// 	console.log('纹理图片资源加载完成')
+		// }
+		// loadingManager.onProgress = (url, loaded, total)=>{
+		// 	console.log(`图片加载中,共${total}张,当前已加载${loaded}张${url}`);
+		// }
+		// loadingManager.onError = (url)=>{
+		// 	console.log(`加载失败 ${url}`);
+		// }
+
+		// 4. 纹理重复、偏移、旋转
+		const loader = new TextureLoader();
+		const texture: Texture = loader.load(imgSrc);
+		texture.wrapS = RepeatWrapping;
+		texture.wrapT = RepeatWrapping;
+		texture.repeat.set(2,3); // 设置水平方向重复2次\垂直方向重复3次
+		texture.offset.set(0.5, 0.25); // 设置纹理水平方向偏移0.5个纹理宽度、垂直方向偏移0.25个纹理宽度
+		texture.center.set(0.5,0.5); // 将旋转中心点改为图片的正中心位置
+		texture.rotation = MathUtils.degToRad(45);// 设置纹理旋转弧度
+		const material = new MeshBasicMaterial({
+			map: texture
+		})
 
 		// 创建物体
 		const box = new BoxGeometry(8,8,8);
-		const mesh = new Mesh(box, materialArr);
+		const mesh = new Mesh(box, material);
 		scene.add(mesh);
 
 		// 渲染器渲染

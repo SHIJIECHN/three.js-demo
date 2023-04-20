@@ -44,7 +44,11 @@ export const data = [
 				icon: 'AppstoreOutlined',
 				path: '/basic/07-texture',
 				title: '纹理'
-
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/08-light',
+				title: '关照'
 			}
 		]
 	}

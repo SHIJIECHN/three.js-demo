@@ -73,6 +73,15 @@ const basicRouter: Array<RouteObject> = [
 					title: 'texture',
 					key: 'Texture'
 				}
+			},
+			{
+				path: '/basic/08-light',
+				element: lazyLoad(React.lazy(() => import('@/views/basic/08-light'))),
+				meta: {
+					requiresAuth: true,
+					title: 'texture',
+					key: 'Texture'
+				}
 			}
 		]
 	}
