@@ -35,18 +35,18 @@ const HelloScene = ()=>{
 		const render = (time: number)=>{
 			time = time * 0.001;
       // 1. 没有轴线
-			// nodeArr.forEach(item=>{
-			// 	item.rotation.y = time
-			// })
+			nodeArr.forEach(item=>{
+				item.rotation.y = time
+			})
 
 			// 2. 显示轴线
-			nodeArr.forEach(item=>{
-				const axes = new AxesHelper();
-				const material = axes.material as Material;
-				material.depthTest = false;
-				axes.renderOrder = 1; // renderOrder的值默认为0，这里设置为1，目的是为了提高优先级，避免被物体本身给覆盖住
-				item.add(axes)
-			})
+			// nodeArr.forEach(item=>{
+			// 	const axes = new AxesHelper();
+			// 	const material = axes.material as Material;
+			// 	material.depthTest = false;
+			// 	axes.renderOrder = 1; // renderOrder的值默认为0，这里设置为1，目的是为了提高优先级，避免被物体本身给覆盖住
+			// 	item.add(axes)
+			// })
 			renderer.render(scene, camera);
 			window.requestAnimationFrame(render);
 		}
