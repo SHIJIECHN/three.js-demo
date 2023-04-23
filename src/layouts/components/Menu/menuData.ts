@@ -49,6 +49,11 @@ export const data = [
 				icon: 'AppstoreOutlined',
 				path: '/basic/09-camera',
 				title: '镜头'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/10-fake-shadow',
+				title: '阴影'
 			}
 		]
 	}

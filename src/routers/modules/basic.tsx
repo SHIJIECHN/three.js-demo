@@ -88,10 +88,19 @@ const basicRouter: Array<RouteObject> = [
 				element: lazyLoad(React.lazy(() => import('@/views/basic/09-camera'))),
 				meta: {
 					requiresAuth: true,
-					title: 'texture',
-					key: 'Texture'
+					title: 'camera',
+					key: 'Camera'
 				}
-			}
+			},
+			{
+				path: '/basic/10-fake-shadow',
+				element: lazyLoad(React.lazy(() => import('@/views/basic/10-fake-shadow'))),
+				meta: {
+					requiresAuth: true,
+					title: 'fake-shadow',
+					key: 'FakeShadow'
+				}
+			},
 		]
 	}
 ];
