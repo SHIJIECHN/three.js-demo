@@ -72,13 +72,13 @@ const HelloPrimitives = ()=>{
 		rendererRef.current = renderer;
 
 		// 添加 2 盏灯光
-		const light1 = new DirectionalLight(0xFF0000, 1); // 白色
+		const light1 = new DirectionalLight(0xFFFFFF, 1); // 白色
 		light1.position.set(-1,2,4);// 左前上
 		scene.add(light1);
 
-		// const light2 = new DirectionalLight(0x0000ff, 1);
-		// light2.position.set(1,-2,-4); // 右后下
-		// scene.add(light2);
+		const light2 = new DirectionalLight(0xFFFFFF, 1);
+		light2.position.set(1,-2,-4); // 右后下
+		scene.add(light2);
 
 		// 获得各个solid类型的图元实例，并添加到solidPrimitivesArr中
 		const solidPrimitivesArr: BufferGeometry[] = [];

@@ -82,6 +82,15 @@ const basicRouter: Array<RouteObject> = [
 					title: 'texture',
 					key: 'Texture'
 				}
+			},
+			{
+				path: '/basic/09-camera',
+				element: lazyLoad(React.lazy(() => import('@/views/basic/09-camera'))),
+				meta: {
+					requiresAuth: true,
+					title: 'texture',
+					key: 'Texture'
+				}
 			}
 		]
 	}
