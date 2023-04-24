@@ -54,6 +54,21 @@ export const data = [
 				icon: 'AppstoreOutlined',
 				path: '/basic/10-fake-shadow',
 				title: '阴影'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/11-fog',
+				title: '雾'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/12-render-target',
+				title: '离屏渲染'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/basic/13-buffer-geometry',
+				title: '自定义几何体'
 			}
 		]
 	}

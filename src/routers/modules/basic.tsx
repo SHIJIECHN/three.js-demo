@@ -101,6 +101,33 @@ const basicRouter: Array<RouteObject> = [
 					key: 'FakeShadow'
 				}
 			},
+			{
+				path: '/basic/11-fog',
+				element: lazyLoad(React.lazy(() => import('@/views/basic/11-fog'))),
+				meta: {
+					requiresAuth: true,
+					title: 'fog',
+					key: 'Fog'
+				}
+			},
+			{
+				path: '/basic/12-render-target',
+				element: lazyLoad(React.lazy(() => import('@/views/basic/12-render-target'))),
+				meta: {
+					requiresAuth: true,
+					title: 'render-target',
+					key: 'RenderTarget'
+				}
+			},
+			{
+				path: '/basic/13-buffer-geometry',
+				element: lazyLoad(React.lazy(() => import('@/views/basic/13-buffer-geometry'))),
+				meta: {
+					requiresAuth: true,
+					title: 'buffer-geometry',
+					key: 'BufferGeometry'
+				}
+			},
 		]
 	}
 ];
