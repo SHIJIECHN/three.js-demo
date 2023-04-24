@@ -94,7 +94,7 @@ const basicRouter: Array<RouteObject> = [
 			},
 			{
 				path: '/basic/10-fake-shadow',
-				element: lazyLoad(React.lazy(() => import('@/views/basic/10-fake-shadow'))),
+				element: lazyLoad(React.lazy(() => import('@/views/basic/10-fake-shadow/index'))),
 				meta: {
 					requiresAuth: true,
 					title: 'fake-shadow',
