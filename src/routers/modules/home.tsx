@@ -1,6 +1,8 @@
 import { RouteObject } from '@/routers/interface';
 import { LayoutIndex } from '@/routers/constant';
 import Home from '@/views/home';
+import lazyLoad from "@/routers/utils/lazyLoad";
+import React from "react";
 
 const homeRouter: Array<RouteObject> = [
 	{

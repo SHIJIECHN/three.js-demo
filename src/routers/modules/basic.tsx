@@ -3,7 +3,7 @@ import lazyLoad from '@/routers/utils/lazyLoad';
 import { LayoutIndex } from '@/routers/constant';
 import { RouteObject } from '@/routers/interface';
 
-// 超级表格模块
+// 基础
 const basicRouter: Array<RouteObject> = [
 	{
 		element: <LayoutIndex />,
@@ -128,6 +128,15 @@ const basicRouter: Array<RouteObject> = [
 					key: 'BufferGeometry'
 				}
 			},
+			// {
+			// 	path: '/advanced/01-render-on-demand',
+			// 	element: lazyLoad(React.lazy(() => import('@/views/advanced/01-render-on-demand'))),
+			// 	meta: {
+			// 		requiresAuth: true,
+			// 		title: 'render-on-demand',
+			// 		key: 'RenderOnDemand'
+			// 	}
+			// },
 		]
 	}
 ];

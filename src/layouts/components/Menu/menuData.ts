@@ -71,5 +71,17 @@ export const data = [
 				title: '自定义几何体'
 			}
 		]
+	},
+	{
+		icon: 'TableOutlined',
+		title: '进阶',
+		path: '/advanced',
+		children: [
+			{
+				icon: 'AppstoreOutlined',
+				path: '/advanced/01-render-on-demand',
+				title: '按需渲染'
+			}
+		]
 	}
 ];
