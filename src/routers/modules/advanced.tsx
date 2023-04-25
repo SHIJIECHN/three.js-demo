@@ -11,7 +11,7 @@ const advancedRouter: Array<RouteObject> = [
 		},
 		children: [
 			{
-				path: '/advanced/01-render-on-demand',
+				path: '/advanced.tsx/01-render-on-demand',
 				element: lazyLoad(React.lazy(() => import('@/views/advanced/01-render-on-demand'))),
 				meta: {
 					requiresAuth: true,

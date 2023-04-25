@@ -128,15 +128,6 @@ const basicRouter: Array<RouteObject> = [
 					key: 'BufferGeometry'
 				}
 			},
-			// {
-			// 	path: '/advanced/01-render-on-demand',
-			// 	element: lazyLoad(React.lazy(() => import('@/views/advanced/01-render-on-demand'))),
-			// 	meta: {
-			// 		requiresAuth: true,
-			// 		title: 'render-on-demand',
-			// 		key: 'RenderOnDemand'
-			// 	}
-			// },
 		]
 	}
 ];
