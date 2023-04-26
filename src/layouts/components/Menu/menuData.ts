@@ -75,13 +75,24 @@ export const data = [
 	{
 		icon: 'TableOutlined',
 		title: '进阶',
-		path: '/advanced.tsx',
+		path: '/advanced',
 		children: [
 			{
 				icon: 'AppstoreOutlined',
-				path: '/advanced.tsx/01-render-on-demand',
+				path: '/advanced/01-render-on-demand',
 				title: '按需渲染'
-			}
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/advanced/02-dat-gui',
+				title: 'GUI'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/advanced/03-canvas',
+				title: '画布'
+			},
+
 		]
 	}
 ];
