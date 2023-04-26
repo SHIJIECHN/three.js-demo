@@ -1,14 +1,17 @@
-import {earthOribit, moonOribit, pointLight, solarSystem} from "@/views/basic/05-scene/create-something";
+import {earthOrbit, moonOrbit,  pointLight, solarSystem} from "@/views/basic/05-scene/create-something";
 import {useEffect, useRef} from "react";
 import {AxesHelper, Color, Material, Object3D, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import AxisGridHelper from "@/views/basic/05-scene/AxisGridHelper";
+import * as dat from 'dat.gui'
 
-const nodeArr = [solarSystem, earthOribit, moonOribit]; // 太阳、地球、月亮对应的网格
+const nodeArr = [solarSystem, earthOrbit, moonOrbit]; // 太阳、地球、月亮对应的网格
 
 const HelloScene = ()=>{
 	const canvasRef = useRef<HTMLCanvasElement|null>(null);
 	const rendererRef = useRef<WebGLRenderer|null>(null);
 	const cameraRef = useRef<PerspectiveCamera|null>(null);
 	const sceneRef = useRef<Scene|null>(null);
+	const gui = new dat.GUI();
 
 	useEffect(()=>{
 		// 创建渲染器
@@ -30,6 +33,15 @@ const HelloScene = ()=>{
 		// 将太阳系、灯光添加到场景中
 		scene.add(solarSystem);
 		scene.add(pointLight);
+
+		//dat-gui
+		function makeAxisGrid(node: Object3D, label: string, units:number){
+			const helper = new AxisGridHelper(node, units);
+			// @ts-ignore
+			gui.add(helper, 'visible').name(label);
+		}
+
+		makeAxisGrid(solarSystem, 'solarSystem', 26); // 相当于 solarSystem.visible，执行get方法，选中则执行set方法
 
 		// 创建循环渲染的动画
 		const render = (time: number)=>{
@@ -53,17 +65,17 @@ const HelloScene = ()=>{
 		window.requestAnimationFrame(render);
 
 		// 添加窗口尺寸变化的监听
-		const resizehandle = ()=>{
+		const resizeHandle = ()=>{
 			const canvas = renderer.domElement;
 			camera.aspect = canvas.clientWidth / canvas.clientHeight;
 			camera.updateProjectionMatrix();
 			renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
 		}
-		resizehandle();
-		window.addEventListener('resize', resizehandle);
+		resizeHandle();
+		window.addEventListener('resize', resizeHandle);
 
 		return ()=>{
-			window.removeEventListener('resize', resizehandle);
+			window.removeEventListener('resize', resizeHandle);
 		}
 	}, [canvasRef])
 

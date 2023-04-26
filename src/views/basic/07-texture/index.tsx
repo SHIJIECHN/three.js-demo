@@ -1,4 +1,3 @@
-
 import imgSrc from '@/assets/basic/mapping.jpg';
 import imgSrc1 from '@/assets/basic/flower-1.jpg'
 import imgSrc2 from '@/assets/basic/flower-2.jpg'
@@ -9,11 +8,11 @@ import imgSrc6 from '@/assets/basic/flower-6.jpg'
 
 import {useEffect, useRef} from "react";
 import {
-	BoxGeometry,
+	BoxGeometry, ClampToEdgeWrapping,
 	Color,
 	LoadingManager, MathUtils,
 	Mesh,
-	MeshBasicMaterial,
+	MeshBasicMaterial, MirroredRepeatWrapping,
 	PerspectiveCamera, RepeatWrapping,
 	Scene, Texture,
 	TextureLoader,
@@ -21,6 +20,8 @@ import {
 } from "three";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
+import {GUI} from "dat.gui";
+import {StringToNumberHelper} from "@/views/basic/07-texture/helper";
 // 引入图片资源
 
 const HelloTexture = ()=>{
@@ -43,25 +44,26 @@ const HelloTexture = ()=>{
 
 		// 创建加载器
 		// 1. 6个面都是统一张贴图
-		// const loader = new TextureLoader();
-		// const material = new MeshBasicMaterial({
-		// 	// loader.load('xxx.jpg')返回值为Text类型实例
-		// 	map: loader.load(imgSrc,
-		// 		(texture)=>{
-		// 			console.log('纹理图片加载完成');
-		// 			console.log(texture);
-		// 			console.log(texture.image.currentSrc) // 图片实际加载的地址
-		// 		},
-		// 		(event)=>{
-		// 			console.log('纹理图片加载中');
-		// 			console.log(event)
-		// 		},
-		// 		(error)=>{
-		// 		  console.log('纹理图片加载失败');
-		// 		  console.log(error);
-		// 		}
-		// 		),
-		// });
+		const loader = new TextureLoader();
+		const texture = loader.load(imgSrc,
+			(texture)=>{
+				console.log('纹理图片加载完成');
+				console.log(texture);
+				console.log(texture.image.currentSrc) // 图片实际加载的地址
+			},
+			(event)=>{
+				console.log('纹理图片加载中');
+				console.log(event)
+			},
+			(error)=>{
+				console.log('纹理图片加载失败');
+				console.log(error);
+			}
+		)
+		const material = new MeshBasicMaterial({
+			// loader.load('xxx.jpg')返回值为Text类型实例
+			map: texture,
+		});
 
 
 		// // 2. 每个面不同的贴图
@@ -100,17 +102,40 @@ const HelloTexture = ()=>{
 		// }
 
 		// 4. 纹理重复、偏移、旋转
-		const loader = new TextureLoader();
-		const texture: Texture = loader.load(imgSrc);
-		texture.wrapS = RepeatWrapping;
-		texture.wrapT = RepeatWrapping;
-		texture.repeat.set(2,3); // 设置水平方向重复2次\垂直方向重复3次
-		texture.offset.set(0.5, 0.25); // 设置纹理水平方向偏移0.5个纹理宽度、垂直方向偏移0.25个纹理宽度
-		texture.center.set(0.5,0.5); // 将旋转中心点改为图片的正中心位置
-		texture.rotation = MathUtils.degToRad(45);// 设置纹理旋转弧度
-		const material = new MeshBasicMaterial({
-			map: texture
-		})
+		// const loader = new TextureLoader();
+		// const texture: Texture = loader.load(imgSrc);
+		// texture.wrapS = RepeatWrapping;
+		// texture.wrapT = RepeatWrapping;
+		// texture.repeat.set(2,3); // 设置水平方向重复2次\垂直方向重复3次
+		// texture.offset.set(0.5, 0.25); // 设置纹理水平方向偏移0.5个纹理宽度、垂直方向偏移0.25个纹理宽度
+		// texture.center.set(0.5,0.5); // 将旋转中心点改为图片的正中心位置
+		// texture.rotation = MathUtils.degToRad(45);// 设置纹理旋转弧度
+		// const material = new MeshBasicMaterial({
+		// 	map: texture
+		// })
+
+		// dat-gui
+		const wrapModes = {
+			'ClampToEdgeWrapping': ClampToEdgeWrapping,
+			'RepeatWrapping': RepeatWrapping,
+			'MirroredRepeatWrapping': MirroredRepeatWrapping,
+		};
+
+		const updateTexture = ()=> {
+			texture.needsUpdate = true;
+		}
+
+		const gui = new GUI();
+		gui.width = 300;
+		type ITexture = {
+			obj: Texture,
+			props: string
+		}
+		gui.add< Record<string, unknown>>(new StringToNumberHelper< Record<string, unknown>>(texture, 'wrapS'), 'value',wrapModes).name('texture.wrapS').onChange(updateTexture);
+		// @ts-ignore
+		gui.add(new StringToNumberHelper(texture, 'wrapT'), 'value', wrapModes);
+		// @ts-ignore
+		gui.add(texture.repeat, 'x', 0, 5, .01).name('texture.repeat.x')
 
 		// 创建物体
 		const box = new BoxGeometry(8,8,8);

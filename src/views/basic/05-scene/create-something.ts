@@ -18,20 +18,20 @@ const moonMesh = new Mesh(sphere, moonMaterial);
 moonMesh.scale.set(0.5,0.5,0.5); // 将球体尺寸缩小0.5倍
 
 // 创建一个3D空间，用来容纳月球，相当于月球轨迹空间
-export const moonOribit = new Object3D();
-moonOribit.position.x = 2;
-moonOribit.add(moonMesh);
+export const moonOrbit = new Object3D();
+moonOrbit.position.x = 2;
+moonOrbit.add(moonMesh);
 
 // 创建一个3D空间，用来容纳地球，相当于地球轨迹空间
-export const earthOribit = new Object3D();
-earthOribit.position.x = 10;
-earthOribit.add(earthMesh);
-earthOribit.add(moonOribit);
+export const earthOrbit = new Object3D();
+earthOrbit.position.x = 10;
+earthOrbit.add(earthMesh);
+earthOrbit.add(moonOrbit);
 
 // 创建一个3D空间，用来容纳太阳和地球（含地球）
 export const solarSystem = new Object3D();
 solarSystem.add(sumMesh);
-solarSystem.add(earthOribit);
+solarSystem.add(earthOrbit);
 
 // 创建点光源
 export const pointLight = new PointLight(0xFFFFFF, 3);
