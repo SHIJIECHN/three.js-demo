@@ -37,14 +37,15 @@ const HelloOBJLoader = ()=>{
 		// 加载模型
 		const mtlLoader = new MTLLoader();
 		const objLoader = new OBJLoader();
-		mtlLoader.setPath('../public/model/');
-		mtlLoader.load('../model/windmill.mtl', (materialCreator)=>{
+		mtlLoader.setPath('../public/model/'); // 注意这里的路径的设置
+		mtlLoader.load('../model/monkey.mtl', (materialCreator)=>{
 			objLoader.setMaterials(materialCreator);
 			objLoader.setPath('../public/model/')
-			objLoader.load('windmill.obj', (group)=>{
+			objLoader.load('monkey.obj', (group)=>{
 				scene.add(group)
 			})
 		})
+
 		// loader.load(windmillUrl, (group)=>{
 		// 	console.log(group);
 		// 	scene.add(group)
