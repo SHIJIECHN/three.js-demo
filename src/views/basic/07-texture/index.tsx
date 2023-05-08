@@ -22,7 +22,13 @@ import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
 import {GUI} from "dat.gui";
 import {StringToNumberHelper} from "@/views/basic/07-texture/helper";
+import {type} from "os";
 // 引入图片资源
+
+type ITexture = {
+	[P in keyof Texture]: Texture[P]
+};
+
 
 const HelloTexture = ()=>{
 	const canvasRef = useRef<HTMLCanvasElement|null>(null);
@@ -120,22 +126,6 @@ const HelloTexture = ()=>{
 			'RepeatWrapping': RepeatWrapping,
 			'MirroredRepeatWrapping': MirroredRepeatWrapping,
 		};
-
-		const updateTexture = ()=> {
-			texture.needsUpdate = true;
-		}
-
-		const gui = new GUI();
-		gui.width = 300;
-		type ITexture = {
-			obj: Texture,
-			props: string
-		}
-		gui.add< Record<string, unknown>>(new StringToNumberHelper< Record<string, unknown>>(texture, 'wrapS'), 'value',wrapModes).name('texture.wrapS').onChange(updateTexture);
-		// @ts-ignore
-		gui.add(new StringToNumberHelper(texture, 'wrapT'), 'value', wrapModes);
-		// @ts-ignore
-		gui.add(texture.repeat, 'x', 0, 5, .01).name('texture.repeat.x')
 
 		// 创建物体
 		const box = new BoxGeometry(8,8,8);

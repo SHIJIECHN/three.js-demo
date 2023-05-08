@@ -92,7 +92,16 @@ export const data = [
 				path: '/advanced/03-canvas',
 				title: '画布'
 			},
-
+			{
+				icon: 'AppstoreOutlined',
+				path: '/advanced/04-earth',
+				title: '地球'
+			},
+			{
+				icon: 'AppstoreOutlined',
+				path: '/advanced/05-obj',
+				title: '加载.obj模型'
+			},
 		]
 	}
 ];

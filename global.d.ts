@@ -1,3 +1,7 @@
+declare module '*.asc';
+declare module '*.obj';
+declare module '*.mtl';
+declare module '*.gltf';
 declare module '*.png'; // 告诉ts,允许在React代码中引入png格式的文件模型
 declare module '*.gif';
 declare module '*.jpg';

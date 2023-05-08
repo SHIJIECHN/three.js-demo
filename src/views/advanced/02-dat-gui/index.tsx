@@ -1,7 +1,12 @@
 import * as dat from 'dat.gui'
 import './index.less'
+import {useState} from 'react';
+import DatGui from "react-dat-gui";
 
 const HelloGUI = ()=>{
+	/**
+	 * dat-gui
+	 */
 	const gui = new dat.GUI();
 	console.log(gui)
 	const options = {
@@ -23,8 +28,6 @@ const HelloGUI = ()=>{
 	const folder = gui.addFolder('下拉框')
 	folder.add(testObj, 'type', ['one', 'two', 'three'])
 
-	// gui.addFolder('下拉框类型')
-	// gui.add(testObj, 'type', ['one', 'two', 'three'])
 
 	return <div>123</div>
 }

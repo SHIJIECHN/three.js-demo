@@ -19,7 +19,12 @@ export class DegRadHelper{
 	}
 }
 
-export class StringToNumberHelper<T>{
+interface GenericInterface<U>{
+	obj: U,
+	prop: keyof U
+}
+
+export class StringToNumberHelper<T> {
 	obj: T;
 	prop: keyof T;
 	constructor(obj: T ,prop:keyof T) {
@@ -27,10 +32,9 @@ export class StringToNumberHelper<T>{
 		this.prop = prop;
 	}
 	get value(){
-		return this.obj[this.prop];
+		return this.obj[this.prop] as string;
 	}
 	set value(v:string){
-		// @ts-ignore
 		this.obj[this.prop] = parseFloat(v);
 	}
 }

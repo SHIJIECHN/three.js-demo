@@ -1,4 +1,5 @@
 {
+	"files": ["global.d.ts"],
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,

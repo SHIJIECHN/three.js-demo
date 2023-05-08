@@ -1,8 +1,12 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import {BoxGeometry, Color, DirectionalLight, Mesh, MeshPhongMaterial, PerspectiveCamera, Scene, WebGLRenderer} from "three";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
+type RenderType = () => void;
+
 const useCreateScene = (canvasRef: React.RefObject<HTMLCanvasElement>)=>{
+	const renderRef = useRef<RenderType | null>(null);
+
 	useEffect(()=>{
 		if(canvasRef.current === null) return;
 
@@ -30,15 +34,20 @@ const useCreateScene = (canvasRef: React.RefObject<HTMLCanvasElement>)=>{
 			cubes.push(mesh);
 		})
 
-		const render = (time: number) =>{
+		const render = ()=>{
+			renderer.render(scene, camera);
+		}
+		renderRef.current = render;
+
+		const animate = (time: number) =>{
 			time  *= 0.001;
 			cubes.forEach(cube=>{
 				cube.rotation.x = cube.rotation.y = time;
 			})
-			renderer.render(scene, camera);
-			window.requestAnimationFrame(render);
+			render();
+			window.requestAnimationFrame(animate);
 		}
-		window.requestAnimationFrame(render);
+		window.requestAnimationFrame(animate);
 
 		const handleResize = ()=>{
 			if(canvasRef.current === null) return;
@@ -53,7 +62,10 @@ const useCreateScene = (canvasRef: React.RefObject<HTMLCanvasElement>)=>{
 		return ()=>{
 			window.removeEventListener('resize', handleResize);
 		}
+
 	}, [canvasRef])
+
+	return renderRef;
 }
 
 export default useCreateScene;

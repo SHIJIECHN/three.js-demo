@@ -36,7 +36,25 @@ const advancedRouter: Array<RouteObject> = [
 					title: 'dat-gui',
 					key: 'DatGUI'
 				}
-			}
+			},
+			{
+				path: '/advanced/04-earth',
+				element: lazyLoad(React.lazy(() => import('@/views/advanced/04-earth'))),
+				meta: {
+					requiresAuth: true,
+					title: 'earth',
+					key: 'Earth'
+				}
+			},
+			{
+				path: '/advanced/05-obj',
+				element: lazyLoad(React.lazy(() => import('@/views/advanced/05-obj'))),
+				meta: {
+					requiresAuth: true,
+					title: 'obj',
+					key: 'Obj'
+				}
+			},
 		]
 	}
 	]
